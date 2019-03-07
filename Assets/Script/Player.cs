@@ -10,6 +10,9 @@ public class Player : MonoBehaviour {
     float xMin;
     float xMax;
 
+    float yMin;
+    float yMax;
+
 	// Use this for initialization
 	void Start () {
 
@@ -22,6 +25,9 @@ public class Player : MonoBehaviour {
         Camera gameCamera = Camera.main;
         xMin = gameCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).x;
         xMax = gameCamera.ViewportToWorldPoint(new Vector3(1, 0, 0)).x;
+
+        yMin = gameCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).y;
+        yMax = gameCamera.ViewportToWorldPoint(new Vector3(0, 1, 0)).y;
     }
 
     // Update is called once per frame
@@ -37,7 +43,7 @@ public class Player : MonoBehaviour {
         var deltaY = Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed;
 
         var newXPOS = Mathf.Clamp(transform.position.x + deltaX, xMin, xMax);
-        var newYPOS = transform.position.y + deltaY;
+        var newYPOS = Mathf.Clamp(transform.position.y + deltaY, yMin, yMax);
 
         transform.position = new Vector2(newXPOS, newYPOS);
     }
