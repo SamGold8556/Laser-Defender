@@ -23,13 +23,13 @@ GameObject:
   - component: {fileID: 50757316534697110}
   - component: {fileID: 61230977575690038}
   - component: {fileID: 114647632004386332}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: spr_greenLaser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4044560176349964
 Transform:
   m_ObjectHideFlags: 1

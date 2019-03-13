@@ -5,16 +5,39 @@ using UnityEngine;
 public class Health : MonoBehaviour {
 
     [SerializeField] float health = 100;
+    [SerializeField] float minTimeBetweenShots = 0.2f;
+    [SerializeField] float maxTimeBetweenShots = 1.0f;
+    [SerializeField] float shotCounter;
 
-	// Use this for initialization
-	void Start () {
-		
+    [SerializeField] GameObject enemyLaserPrefab;
+    [SerializeField] float enemyProjectileSpeed = 10f;
+
+    // Use this for initialization
+    void Start () {
+        shotCounter = Random.Range(minTimeBetweenShots, maxTimeBetweenShots);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		CountDownAndShoot();
 	}
+
+    private void CountDownAndShoot()
+    {
+        shotCounter -= Time.deltaTime;
+
+        if(shotCounter <= 0f)
+        {
+            Fire();
+            shotCounter = Random.Range(minTimeBetweenShots, maxTimeBetweenShots);
+        }
+    }
+
+    public void Fire()
+    {
+        GameObject laser = Instantiate(enemyLaserPrefab, transform.position, Quaternion.identity) as GameObject;
+        laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, enemyProjectileSpeed);
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -25,6 +48,7 @@ public class Health : MonoBehaviour {
     private void ProcessHit(DamageDealer damageDealer)
     {
         health -= damageDealer.getDamage();
+        damageDealer.Hit();
 
         if (health <= 0)
         {
