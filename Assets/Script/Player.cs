@@ -26,6 +26,10 @@ public class Player : MonoBehaviour {
     float yMin;
     float yMax;
 
+    public int GetHealth()
+    {
+        return playerHealth;
+    }
     // Use this for initialization
     private void Awake()
     {

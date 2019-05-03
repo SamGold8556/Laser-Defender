@@ -31,10 +31,17 @@ public class Level : MonoBehaviour {
 
     }
 
+    public void RestartGame()
+    {
+        SceneManager.LoadScene("Level 1");
+        FindObjectOfType<GameSession>().Restart();
+    }
+
     public void LoadGameScene()
     {
-        FindObjectOfType<GameSession>().Restart();
         SceneManager.LoadScene("Level 1");
+        //FindObjectOfType<GameSession>().Restart();
+
     }
 
     public void LoadStartMenu()
