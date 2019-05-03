@@ -9,12 +9,15 @@ public class Player : MonoBehaviour {
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float padding = 0.5f;
     [SerializeField] int playerHealth = 200;
+    AudioSource playerDeathSFX;
+    [SerializeField] AudioClip playerDeathAudioClip;
 
     [Header("Projectile")]
     [SerializeField] GameObject laserPrefab;
     [SerializeField] float projectileSpeed = 10f;
     [SerializeField] float projectileFiringPeriod = 0.1f;
 
+    Level sceneManager;
     Coroutine firingCoroutine;
 
     float xMin;
@@ -23,8 +26,13 @@ public class Player : MonoBehaviour {
     float yMin;
     float yMax;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    private void Awake()
+    {
+        playerDeathSFX = GetComponent<AudioSource>();
+    }
+
+    void Start () {
 
         SetUpMoveBoundaries();
 	}
@@ -43,8 +51,11 @@ public class Player : MonoBehaviour {
 
         if (playerHealth <= 0)
         {
+            AudioSource.PlayClipAtPoint(playerDeathAudioClip, new Vector3(transform.position.x, transform.position.y, 0));
+            //playerDeathSFX.Play();
             Destroy(gameObject);
-        }
+            FindObjectOfType<Level>().LoadGameOver();
+                    }
     }
 
     private void SetUpMoveBoundaries()

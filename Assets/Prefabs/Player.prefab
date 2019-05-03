@@ -100,8 +100,11 @@ MonoBehaviour:
   moveSpeed: 10
   padding: 0.5
   playerHealth: 200
-  laserPrefab: {fileID: 0}
-  projectileSpeed: 20
+  playerDeathAudioClip: {fileID: 8300000, guid: c82c9824b9071e14d87f420cf0c25595,
+    type: 3}
+  laserPrefab: {fileID: 1880405544732874, guid: 5949db92523f06547bc0f58638148e72,
+    type: 2}
+  projectileSpeed: 10
   projectileFiringPeriod: 0.1
 --- !u!212 &212522222646528178
 SpriteRenderer:
